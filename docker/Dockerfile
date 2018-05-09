@@ -3,16 +3,10 @@ FROM selenium/node-chrome
 MAINTAINER madehao1983@sina.com
 
 USER root
-RUN localedef -f UTF-8 -i zh_CN zh_CN \
+RUN localedef -f UTF-8 -i zh_CN zh_CN.UTF-8 \
 
     && echo "Asia/Shanghai" | tee /etc/timezone \
-    && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-
-    && apt-get update \
-    && apt-get -y install fonts-arphic-ukai fonts-arphic-uming fonts-wqy-zenhei \
-
-    && apt-get clean \
-    && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
+    && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 USER seluser
 ENV TZ="Asia/Shanghai" \
